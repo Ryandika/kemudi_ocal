@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>679424077834-e70qsgd6iapi4a7e7pt53uupuldurg2v.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.679424077834-e70qsgd6iapi4a7e7pt53uupuldurg2v</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>679424077834-ms9knt0ftl4fbh962f3t1q43uhb90idh.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCGlz7TqooRcOBMuqroCFfNBKhKycjbBtc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>679424077834</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.loginRegist</string>
+	<key>PROJECT_ID</key>
+	<string>kemudi-1db2a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kemudi-1db2a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:679424077834:ios:e73f91db03ea23ab006ff3</string>
+	<key>DATABASE_URL</key>
+	<string>https://kemudi-1db2a-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>
