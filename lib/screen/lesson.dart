@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_regist/data/details.dart';
-import 'package:login_regist/main.dart';
 import 'package:login_regist/models/lesson_details.dart';
 import 'package:login_regist/widgets/lesson_button.dart';
 import 'lesson_detail.dart';

@@ -124,8 +124,8 @@ class _QuizPageState extends State<QuizPage> {
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Quiz Page'),
-                backgroundColor: colorScheme.onPrimary,
-                foregroundColor: colorScheme.onPrimaryContainer,
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
                 // actions: [
                 //   IconButton(onPressed: userOut, icon: const Icon(Icons.logout)),
                 // ],
@@ -135,19 +135,19 @@ class _QuizPageState extends State<QuizPage> {
                 child: Column(
                   children: [
                     const SizedBox(height: 20),
-                    Text(
-                      'Nilai: $score',
-                        style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                    ),
+                    // Text(
+                    //   'Nilai: $score',
+                    //     style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    // ),
                     const SizedBox(height: 20),
                     QuestionWidget(
                         indexAction: index,
                         question: extractedData[index].title,
                         totalQuestion: extractedData.length,
                     ),
-                    const SizedBox(height: 20),
-                    const Divider(color: Colors.black),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 40),
+                    // const Divider(color: Colors.black),
+                    // const SizedBox(height: 20),
                     for (int i = 0; i < extractedData[index].options.length; i++)
                   
                     GestureDetector(
@@ -162,9 +162,9 @@ class _QuizPageState extends State<QuizPage> {
                         //function color card is pressed
                         colorCard: isPressed
                             ? extractedData[index].options.values.toList()[i] == true
-                                ? colorScheme.onPrimaryContainer
-                                : colorScheme.onErrorContainer
-                           : colorScheme.onPrimaryContainer
+                                ? colorScheme.primary
+                                : colorScheme.error
+                           : colorScheme.primary
                       ),
                     ),
                   ],

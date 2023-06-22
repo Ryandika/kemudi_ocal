@@ -1,89 +1,44 @@
 import 'package:flutter/material.dart';
-
+import 'package:login_regist/models/location_details.dart';
 
 class ListKursus extends StatelessWidget {
-  ListKursus({super.key});
+  ListKursus(
+      {super.key, required this.course, required this.onSelectCoursePlace});
 
-  int selectedIndex = 0;
-  final List<String> lokasi = [
-    'Ar-Rahman - Jakarta Timur',
-    'Ar-Rahman - Jakarta Barat',
-    'Ar-Rahman - Jakarta Pusat',
-    'Persemija - Jakarta Selatan',
-    'Persemija - Jakarta Utara',
-    'Persemija - Depok',
-    'Persemija - Bogor',
-    'Persemija - Tangerang',
-    'Persemija - Bekasi',
-    'Asri - Pasar Rebo',
-  ];
+  final LocationDetail course;
+  final void Function(LocationDetail course) onSelectCoursePlace;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(5, 0, 0, 5),
-            child: Text("Pilih Lokasi Kursus Mengemudi Terdekat!"),
-          ),
-          Row(
-            children: [
-              Container(
-                width: 345,
-                child: Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text("Cari"), Icon(Icons.search_rounded)],
-                    ),
-                  ),
-                ),
+    return Card(
+      elevation: 5,
+      child: InkWell(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              alignment: Alignment.topLeft,
+              child: const Text(
+                "Lokasi",
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
               ),
-              const Icon(Icons.sort)
-            ],
-          ),
-          Container(
-          height: 450,
-          child: ListView.builder(
-            itemCount: lokasi.length,
-            itemBuilder: (context, index) {
-              return Card(
-                elevation: 5,
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      alignment: Alignment.topLeft,
-                      child: const Text(
-                        "Lokasi",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 12),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        lokasi[index],
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            },
-          ),
-          ),
-          
-        ],
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              alignment: Alignment.topLeft,
+              child: Text(
+                course.place,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            )
+          ],
+        ),
+        onTap: () {
+          onSelectCoursePlace(course);
+        },
       ),
     );
   }
 }
+      

@@ -66,7 +66,7 @@ class ResultPage extends StatelessWidget {
                 child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 15),
-                    decoration: BoxDecoration(color: colorScheme.onPrimary,
+                    decoration: BoxDecoration(color: colorScheme.inversePrimary,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text('Mulai ulang',

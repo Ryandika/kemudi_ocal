@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_regist/main.dart';
-import 'package:login_regist/models/lesson_details.dart';
+import 'package:login_regist/screen/about_us.dart';
 import 'package:login_regist/screen/editprofile.dart';
-import 'package:login_regist/screen/lesson_detail.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -87,65 +86,91 @@ class ProfileScreen extends StatelessWidget {
 
           // ),
           const SizedBox(height: 10),
-          SizedBox(
-            height: 180,
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final card = profileContinueCardd[index];
-                return SizedBox(
-                  width: 140,
-                  child: Card(
-                    shadowColor: Colors.black12,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          Icon(
-                            card.icon,
-                            size: 25,
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            card.title,
-                            textAlign: TextAlign.center,
-                          ),
-                          const Spacer(),
-                          Text(card.nilai, style: TextStyle(fontSize: 16),)
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) =>
-                  const Padding(padding: EdgeInsets.only(right: 5)),
-              itemCount: profileContinueCardd.length,
-            ),
-          ),
+          // SizedBox(
+          //   height: 180,
+          //   child: ListView.separated(
+          //     physics: const BouncingScrollPhysics(),
+          //     scrollDirection: Axis.horizontal,
+          //     itemBuilder: (context, index) {
+          //       final card = profileContinueCardd[index];
+          //       return SizedBox(
+          //         width: 140,
+          //         child: Card(
+          //           shadowColor: Colors.black12,
+          //           child: Padding(
+          //             padding: const EdgeInsets.all(15),
+          //             child: Column(
+          //               children: [
+          //                 Icon(
+          //                   card.icon,
+          //                   size: 25,
+          //                 ),
+          //                 SizedBox(height: 10),
+          //                 Text(
+          //                   card.title,
+          //                   textAlign: TextAlign.center,
+          //                 ),
+          //                 const Spacer(),
+          //                 Text(card.nilai, style: TextStyle(fontSize: 16),)
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //     separatorBuilder: (context, index) =>
+          //         const Padding(padding: EdgeInsets.only(right: 5)),
+          //     itemCount: profileContinueCardd.length,
+          //   ),
+          // ),
           const SizedBox(height: 35),
-          ...List.generate(
-            customlistTile.length,
-            (index) {
-              final tile = customlistTile[index];
-              return Card(
+          Card(
                 elevation: 4,
                 shadowColor: Colors.black12,
                 child: ListTile(
-                  leading: Icon(tile.icon, color: colorScheme.onPrimaryContainer,),
-                  title: Text(tile.title),
+                  leading: Icon(Icons.people, color: colorScheme.onPrimaryContainer,),
+                  title: Text('Tentang Kami'),
+                  trailing: Icon(Icons.chevron_right, color: colorScheme.onPrimaryContainer,),
+                  onTap: () {
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AboutUsScreen()),
+                          );
+                  },
+                ),
+          ),
+          Card(
+                elevation: 4,
+                shadowColor: Colors.black12,
+                child: ListTile(
+                  leading: Icon(Icons.logout, color: colorScheme.onPrimaryContainer,),
+                  title: Text('Keluar'),
                   trailing: Icon(Icons.chevron_right, color: colorScheme.onPrimaryContainer,),
                   onTap: userOut,
                 ),
-              );
-            },
           )
         ],
       ),
     );
   }
 }
+          // ...List.generate(
+          //   customlistTile.length,
+          //   (index) {
+          //     final tile = customlistTile[index];
+          //     return Card(
+          //       elevation: 4,
+          //       shadowColor: Colors.black12,
+          //       child: ListTile(
+          //         leading: Icon(tile.icon, color: colorScheme.onPrimaryContainer,),
+          //         title: Text(tile.title),
+          //         trailing: Icon(Icons.chevron_right, color: colorScheme.onPrimaryContainer,),
+          //         onTap: userOut,
+          //       ),
+          //     );
+          //   },
+          // )
 
 class ProfileContinueCard {
   final String title;

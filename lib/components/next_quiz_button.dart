@@ -10,7 +10,7 @@ class NextButtonQuiz extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: colorScheme.onPrimary,
+        color: colorScheme.inversePrimary,
         borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.symmetric(vertical: 20),

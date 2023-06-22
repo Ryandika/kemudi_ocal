@@ -32,7 +32,7 @@ class _TabsScreenState extends State<TabsScreen> {
 final List<Widget> _screens = [
 const HomeScreen(),
 const LessonScreen(),
-const FindPage(),
+ FindPage(),
 const ProfileScreen(),
 ];
 
@@ -63,7 +63,7 @@ const ProfileScreen(),
         items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home), 
-          label: "Home"),
+          label: "Beranda"),
         BottomNavigationBarItem(
           icon: Icon(Icons.menu_book), 
           label: "Pelajaran"),

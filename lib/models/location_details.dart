@@ -1,6 +1,8 @@
 class LocationDetail {
-const LocationDetail(this.course, this.place);
+const LocationDetail(this.place, this.latitude, this.longitude, this.address);
 
-final String course;
-final List<String> place;
+final String place;
+final String latitude;
+final String longitude;
+final List<String> address;
 } 
