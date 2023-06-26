@@ -14,7 +14,7 @@ class LessonButton extends StatelessWidget {
       elevation: 5,
       child: InkWell(
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           alignment: Alignment.topLeft,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -22,7 +22,7 @@ class LessonButton extends StatelessWidget {
               Text(
                 lesson.title,
                 style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16),
+                    fontWeight: FontWeight.bold, fontSize: 14),
               ),
               const Icon(
                 Icons.chevron_right_rounded,
