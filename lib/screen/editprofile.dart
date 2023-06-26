@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_regist/main.dart';
-import 'package:login_regist/screen/tabs.dart';
-import 'package:login_regist/screen/profile.dart';
 
 // class EditProfileScreen extends StatelessWidget{
 // const EditProfileScreen({super.key});
@@ -32,7 +30,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         foregroundColor: colorScheme.onPrimary,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           ),
@@ -51,18 +49,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         // ],
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
           },
           child: ListView(
             children: [
-              Text(
+              const Text(
                 "Edit Profil",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Center(
@@ -80,7 +78,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               spreadRadius: 2,
                               blurRadius: 10,
                               color: Colors.black.withOpacity(0.1),
-                              offset: Offset(0, 10))
+                              offset: const Offset(0, 10))
                         ],
                         shape: BoxShape.circle,
                       ),
@@ -99,7 +97,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             color: Colors.green,
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.edit,
                             color: Colors.white,
                           ),
@@ -107,7 +105,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
               buildtextfield("Nama Depan", "Farrel"),
@@ -159,11 +157,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(bottom: 3),
+            contentPadding: const EdgeInsets.only(bottom: 3),
             labelText: labelText,
             //floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.normal,
               color: Colors.black,

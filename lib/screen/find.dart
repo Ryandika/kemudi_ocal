@@ -1,11 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:login_regist/data/courses.dart';
 import 'package:login_regist/models/location_details.dart';
 import 'package:login_regist/screen/course_location.dart';
 import '../widgets/list_kursus.dart';
 
-class FindPage extends StatelessWidget {
+class FindPage extends StatefulWidget {
   const FindPage({super.key});
+
+  @override
+  State<FindPage> createState() => _FindPageState();
+}
+
+class _FindPageState extends State<FindPage> {
+  List<LocationDetail> _foundLocation = [];
+
+  @override
+  void initState() {
+    _foundLocation = courses;
+    super.initState();
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<LocationDetail> results = [];
+    if (enteredKeyword.isEmpty || enteredKeyword == '') {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = courses;
+    } else {
+      results = courses
+          .where((location) => location.place
+              .trim()
+              .toLowerCase()
+              .contains(enteredKeyword.trim().toLowerCase()))
+          .toList();
+      // we use the toLowerCase() method to make it case-insensitive
+
+      setState(() {
+        _foundLocation = results;
+      });
+    }
+  }
+
+  void _getCurrentLocation() async {
+    setState(() {
+    });
+
+    Location location = Location();
+
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+
+    setState(() {
+    });
+
+  }
 
   void selectCoursePLace(BuildContext context, LocationDetail course) {
     Navigator.of(context).push(MaterialPageRoute(
@@ -17,55 +82,60 @@ class FindPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
-      itemCount: courses.length,
+      itemCount: _foundLocation.length,
       itemBuilder: (ctx, index) => ListKursus(
-        course: courses[index],
+        course: _foundLocation[index],
         onSelectCoursePlace: (course) {
           selectCoursePLace(context, course);
         },
       ),
     );
 
-    final TextEditingController searchController = TextEditingController();
+    // if (_isGettingLocation) {
+    //   content = const Center(child: CircularProgressIndicator());
+    // }
 
     return Scaffold(
-      appBar: AppBar(
-          title: Container(
-        // Add padding around the search bar
-        // padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        // Use a Material design search bar
-        child: TextField(
-          controller: searchController,
-          decoration: InputDecoration(
-            hintText: 'Cari Lokasi Kursus...',
-            // Add a clear button to the search bar
-            suffixIcon: IconButton(
-              icon: const Icon(
-                Icons.clear,
-                color: Colors.black,
-              ),
-              onPressed: () => searchController.clear(),
-            ),
-            // Add a search icon or button to the search bar
-            prefixIcon: IconButton(
-              icon: const Icon(
+        appBar: AppBar(
+          title: TextField(
+            onChanged: (value) => _runFilter(value),
+            decoration: const InputDecoration(
+              hintText: 'Cari Lokasi Kursus...',
+              prefixIcon: Icon(
                 Icons.search,
                 color: Colors.black,
               ),
-              onPressed: () {
-                // Perform the search here
-              },
             ),
-            // border: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(20.0),
-            // ),
           ),
         ),
-      )),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5.0),
-        child: content,
-      ),
-    );
+        body: Center(
+          child: Column(
+            children: [
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 10),
+              //   child: SizedBox(
+              //     width: double.infinity,
+              //     child: ElevatedButton.icon(
+              //       icon: const Icon(Icons.sort),
+              //       label: const Text('Sort by nearest from my location'),
+              //       onPressed: _getCurrentLocation,
+              //     ),
+              //   ),
+              // ),
+        
+              const SizedBox(
+                height: 14,
+              ),
+              Expanded(
+                child: _foundLocation.isNotEmpty
+                    ? content
+                    : const Text(
+                        'Pencarian tidak ditemukan.',
+                        textAlign: TextAlign.center,
+                      ),
+              ),
+            ],
+          ),
+        ));
   }
 }

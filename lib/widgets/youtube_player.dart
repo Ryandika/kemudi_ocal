@@ -15,15 +15,15 @@ class YoutubePlayerWidget extends StatefulWidget {
 class _YoutubePlayerWidgetState extends State<YoutubePlayerWidget> {
   @override
   Widget build(BuildContext context) {
-    late YoutubePlayerController _controller;
-    late YoutubePlayerController _controller2;
+    late YoutubePlayerController controller;
+ 
 
     @override
     void initState() {
       final videoID = YoutubePlayer.convertUrlToId(widget.lesson.video[0]);
-      final videoID2 = YoutubePlayer.convertUrlToId(widget.lesson.video[1]);
 
-      _controller = YoutubePlayerController(
+
+      controller = YoutubePlayerController(
         initialVideoId: videoID!,
         flags: const YoutubePlayerFlags(autoPlay: false, mute: false),
       );
@@ -32,7 +32,7 @@ class _YoutubePlayerWidgetState extends State<YoutubePlayerWidget> {
     }
 
     return YoutubePlayer(
-      controller: _controller,
+      controller: controller,
       showVideoProgressIndicator: true,
       bottomActions: [
         CurrentPosition(),

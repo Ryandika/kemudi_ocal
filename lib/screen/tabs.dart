@@ -1,17 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:login_regist/screen/find.dart';
 import 'package:login_regist/screen/home.dart';
 import 'package:login_regist/screen/lesson.dart';
 import 'package:login_regist/screen/profile.dart';
-
-final GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: [
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-  ],
-);
 
 
 class TabsScreen extends StatefulWidget {
@@ -24,17 +16,16 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   final user = FirebaseAuth.instance.currentUser!;
 
-  GoogleSignInAccount? _currentUser;
 
   //  @override
- int _selectedIndex = 0;
+  int _selectedIndex = 0;
 
-final List<Widget> _screens = [
-const HomeScreen(),
-const LessonScreen(),
- FindPage(),
-const ProfileScreen(),
-];
+  final List<Widget> _screens = [
+    HomeScreen(),
+    const LessonScreen(),
+    const FindPage(),
+    const ProfileScreen(),
+  ];
 
   //log out function
   void userOut() {
@@ -61,21 +52,16 @@ const ProfileScreen(),
         },
         type: BottomNavigationBarType.fixed,
         items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home), 
-          label: "Beranda"),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.menu_book), 
-          label: "Pelajaran"),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.gps_fixed_outlined), 
-          label: "Temukan"),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_2_outlined), 
-          label: "Profil"),
-      ],
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Beranda"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.menu_book), label: "Pelajaran"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.gps_fixed_outlined), label: "Temukan"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person_2_outlined), label: "Profil"),
+        ],
       ),
-     /* ListView(children: <Widget>[
+      /* ListView(children: <Widget>[
         Column(
           children: [
             const SizedBox(

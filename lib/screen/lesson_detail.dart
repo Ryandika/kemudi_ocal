@@ -1,9 +1,5 @@
-import 'dart:ffi';
 
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
-import 'package:login_regist/main.dart';
 import 'package:login_regist/models/lesson_details.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -26,7 +22,7 @@ class _LessonDetailsScreenState extends State<LessonDetailsScreen> {
   @override
   void initState() {
     final videoID = YoutubePlayer.convertUrlToId(widget.lesson.video[0]);
-    final videoID2 = YoutubePlayer.convertUrlToId(widget.lesson.video[1]);
+    // final videoID2 = YoutubePlayer.convertUrlToId(widget.lesson.video[1]);
 
     _controller = YoutubePlayerController(
       initialVideoId: videoID!,
@@ -45,9 +41,9 @@ class _LessonDetailsScreenState extends State<LessonDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.lesson.title),
-        backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onPrimary,
+        // title: Text(widget.lesson.title),
+        // backgroundColor: colorScheme.primary,
+        // foregroundColor: colorScheme.onPrimary,
       ),
       body: Container(
         margin: const EdgeInsets.all(5),
@@ -61,23 +57,14 @@ class _LessonDetailsScreenState extends State<LessonDetailsScreen> {
                     children: [
                       Container(
                         margin: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10),
-                        alignment: Alignment.topLeft,
+                            vertical: 20, horizontal: 10),
+                        alignment: Alignment.center,
                         child: Text(
                           widget.lesson.title,
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10),
-                        alignment: Alignment.topLeft,
-                        child: const Text(
-                          "Pelajaran 10 Menit",
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      )
                     ],
                   ),
                 ),
@@ -98,13 +85,13 @@ class _LessonDetailsScreenState extends State<LessonDetailsScreen> {
                       for (final lessons in widget.lesson.lesson)
                         Container(
                           margin: const EdgeInsets.symmetric(
-                              vertical: 5, horizontal: 10),
-                          padding: EdgeInsets.only(top: 10),
+                              vertical: 10, horizontal: 15),
+                          padding: const EdgeInsets.only(top: 10),
                           alignment: Alignment.topLeft,
                           child: Text(
                             lessons,
                             style:
-                                const TextStyle(fontSize: 16, letterSpacing: 1),
+                                const TextStyle(fontSize: 16,),
                           ),
                         ),
                       YoutubePlayer(

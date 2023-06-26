@@ -1,26 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:login_regist/components/button.dart';
 import 'package:login_regist/components/textfield.dart';
-import 'package:login_regist/components/square_button.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:login_regist/services/google_auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  RegisterPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
-
-GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: [
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-  ],
-);
 
 class _RegisterPageState extends State<RegisterPage> {
   final emailcontroller = TextEditingController();
@@ -29,8 +20,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final firstnameController = TextEditingController();
   final lastnameController = TextEditingController();
   final ageController = TextEditingController();
+  String? score = '';
 
-  void SignUserUp() async {
+  void signUserUp() async {
     //show loading circle
     showDialog(
       context: context,
@@ -41,210 +33,210 @@ class _RegisterPageState extends State<RegisterPage> {
       },
     );
 
-    //try create user
-    try {
-      // check if password is confirmed
-      if (passwordcontrolller.text == confirmPassController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailcontroller.text,
-          password: passwordcontrolller.text,
-        );
-
-        //add user details
-        addUserDeatils(
-          firstnameController.text.trim(), 
-          lastnameController.text.trim(),
-          int.parse(ageController.text.trim()),
-          emailcontroller.text.trim(),
-        );
-
-      } else {
-        //show  error message
-        showErrorMessage("Password Tidak Cocok");
-      }
-
+    if (firstnameController.text.isEmpty) {
       Navigator.pop(context);
+      //show  error message
+      showErrorMessage("Nama Depan tidak boleh kosong");
+      return;
+    }
+    if (lastnameController.text.isEmpty) {
+      Navigator.pop(context);
+      //show  error message
+      showErrorMessage("Nama Belakang tidak boleh kosong");
+      return;
+    }
+    if (ageController.text.isEmpty) {
+      Navigator.pop(context);
+      //show  error message
+      showErrorMessage("Umur tidak boleh kosong");
+      return;
+    }
+    if (emailcontroller.text.isEmpty) {
+      Navigator.pop(context);
+      //show  error message
+      showErrorMessage("Email tidak boleh kosong");
+      return;
+    }
+    if (passwordcontrolller.text.isEmpty) {
+      Navigator.pop(context);
+      //show  error message
+      showErrorMessage("Kata Sandi tidak boleh kosong");
+      return;
+    }
+    if (passwordcontrolller.text != confirmPassController.text ||
+        confirmPassController.text.isEmpty) {
+      Navigator.pop(context);
+      //show  error message
+      showErrorMessage("Kata Sandi Tidak Cocok");
+      return;
+    }
+
+    try {
+      //create user
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailcontroller.text,
+        password: passwordcontrolller.text,
+      );
+
+      //create document in firestore
+      FirebaseFirestore.instance
+          .collection("Users")
+          .doc(userCredential.user!.email)
+          .set({
+        'username': emailcontroller.text.split('@')[0],
+        'nama depan': firstnameController.text,
+        'nama belakang': lastnameController.text,
+        'age': ageController.text,
+        'email': emailcontroller.text,
+      });
+
+      if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
+      //pop loading
       Navigator.pop(context);
       //show error message
-      showErrorMessage(e.code);
+      // showErrorMessage(e.code);
+
+      switch (e.code) {
+        case "weak-password":
+          showErrorMessage("Kata Sandi minimal 6 karakter alfanumerik");
+          break;
+        case "invalid-email":
+          showErrorMessage("Masukan format email yang benar");
+          break;
+        case "email-already-in-use":
+          showErrorMessage("Email sudah digunakan");
+          break;
+        default:
+          showErrorMessage("Masukan data akun dengan benar");
+      }
     }
   }
 
-  Future addUserDeatils(
-      String firstName, String lastName, int age, String email) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'first name': firstName,
-      'last name': lastName,
-      'age': age,
-      'email': email,
-    });
-  }
-
   void showErrorMessage(String message) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Colors.deepPurple,
-          title: Center(
-            child: Text(
-              message,
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        );
-      },
-    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Center(child: Text(message)),
+      duration: const Duration(seconds: 2),
+      backgroundColor: Colors.black,
+      behavior: SnackBarBehavior.floating,
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 25),
 
                 // logo
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.car_repair,
-                      size: 60,
-                      color: Colors.blue.shade600,
-                    ),
+                Icon(
+                  Icons.car_repair,
+                  size: 100,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                Text(
+                  'Kemudi',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
 
-                    Text(
-                      'Kemudi',
-                      style: TextStyle(
-                          color: Colors.blue.shade600,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
+                const SizedBox(height: 15),
+
+                //text
+                Text(
+                  'Selamat datang,\nSilakan masukan data diri Anda!',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.normal,
+                      ),
+                ),
+
+                const SizedBox(height: 10),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: MyTextfield(
+                        controller: firstnameController,
+                        label: const Text('Nama Depan'),
+                        obscureText: false,
+                        inputFormatters:
+                            FilteringTextInputFormatter.singleLineFormatter,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: MyTextfield(
+                        controller: lastnameController,
+                        label: const Text('Nama Belakang'),
+                        obscureText: false,
+                        inputFormatters:
+                            FilteringTextInputFormatter.singleLineFormatter,
+                      ),
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 10),
-
-                //text
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                  child: Text(
-                    'Selamat datang, Silahkan masukan data Anda!',
-                    style: TextStyle(
-                      color: Colors.blue[700],
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 10),
-
                 //--textfield
-                MyTextfield(
-                  controller: firstnameController,
-                  hintText: 'First Name',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 5),
-
-                MyTextfield(
-                  controller: lastnameController,
-                  hintText: 'Last Name',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 5),
 
                 MyTextfield(
                   controller: ageController,
-                  hintText: 'Age',
+                  label: const Text('Umur'),
                   obscureText: false,
+                  inputFormatters: FilteringTextInputFormatter.digitsOnly,
+                  keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 5),
 
                 //email
                 MyTextfield(
                   controller: emailcontroller,
-                  hintText: 'Email',
+                  label: const Text('Email'),
                   obscureText: false,
+                  inputFormatters:
+                      FilteringTextInputFormatter.singleLineFormatter,
                 ),
                 const SizedBox(height: 5),
 
                 //password
                 MyTextfield(
                   controller: passwordcontrolller,
-                  hintText: 'Password',
+                  label: const Text('Kata Sandi'),
                   obscureText: true,
+                  inputFormatters:
+                      FilteringTextInputFormatter.singleLineFormatter,
                 ),
                 const SizedBox(height: 5),
 
                 //confirm password
                 MyTextfield(
                   controller: confirmPassController,
-                  hintText: 'Confirm Password',
+                  label: const Text('Konfirmasi Kata Sandi'),
                   obscureText: true,
+                  inputFormatters:
+                      FilteringTextInputFormatter.singleLineFormatter,
                 ),
 
                 const SizedBox(height: 20),
 
                 MyButton(
                   text: "Daftar",
-                  onTap: SignUserUp,
+                  onTap: signUserUp,
                 ),
 
                 const SizedBox(height: 20),
-
-                //lanjutkan dengan
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          thickness: 0.5,
-                          color: Colors.grey[400],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text(
-                          'Atau lanjutkan dengan',
-                          style: TextStyle(color: Colors.grey[700]),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          thickness: 0.5,
-                          color: Colors.grey[400],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 30),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // google button
-                    MySquareBtn(
-                        onTap: () {
-                          AuthService().signInWithGoogle();
-                        },
-                        imagePath: 'lib/images/googleicon.png'),
-                  ],
-                ),
-
-                const SizedBox(height: 10),
-
-                //register now
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -253,7 +245,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       'Sudah punya akun?',
                       style: TextStyle(color: Colors.grey[700]),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 20),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: Text(

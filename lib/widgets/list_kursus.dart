@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_regist/models/location_details.dart';
 
 class ListKursus extends StatelessWidget {
-  ListKursus(
+  const ListKursus(
       {super.key, required this.course, required this.onSelectCoursePlace});
 
   final LocationDetail course;
@@ -13,27 +13,25 @@ class ListKursus extends StatelessWidget {
     return Card(
       elevation: 5,
       child: InkWell(
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              alignment: Alignment.topLeft,
-              child: const Text(
-                "Lokasi",
-                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              alignment: Alignment.topLeft,
-              child: Text(
-                course.place,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            )
-          ],
-        ),
+        child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            alignment: Alignment.topLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Lokasi",
+                  style: TextStyle(
+                      fontWeight: FontWeight.normal, fontSize: 14),
+                ),
+                const SizedBox(height: 14,),
+                Text(
+                  course.place,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ],
+            )),
         onTap: () {
           onSelectCoursePlace(course);
         },
@@ -41,4 +39,3 @@ class ListKursus extends StatelessWidget {
     );
   }
 }
-      

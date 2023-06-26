@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:login_regist/main.dart';
 
 class AboutUsScreen extends StatelessWidget {
@@ -10,7 +8,7 @@ class AboutUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tentang Kami'),
+        title: const Text('Tentang Kami'),
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
       ),
@@ -31,7 +29,7 @@ class AboutUsScreen extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                 ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14,
           ),
           Text(
@@ -46,20 +44,25 @@ class AboutUsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 2, left: 5),
-                child: Icon(
-                  Icons.circle,
-                  size: 8,
+                child: Text(
+                  '1.',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 14,
               ),
-              Text(
-                'Membantu pemerintah dalam menyediakan media\nbelajar mengemudi yang taat dengan aturan lalu\nlintas di Indonesia.',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      fontWeight: FontWeight.normal,
-                    ),
+              Expanded(
+                child: Text(
+                  'Membantu pemerintah dalam menyediakan media belajar mengemudi yang taat dengan aturan lalu lintas di Indonesia.',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.normal,
+                      ),
+                ),
               ),
             ],
           ),
@@ -68,24 +71,29 @@ class AboutUsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 2, left: 5),
-                child: Icon(
-                  Icons.circle,
-                  size: 8,
+                child: Text(
+                  '2.',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 14,
               ),
-              Text(
-                'Mempermudah masyarakat untuk mendapatkan\ninformasi mengenai tata cara mengemudi yang\nbaik dan benar disertai dengan video pembelajaran',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      fontWeight: FontWeight.normal,
-                    ),
+              Expanded(
+                child: Text(
+                  'Mempermudah masyarakat untuk mendapatkan informasi mengenai tata cara mengemudi yang baik dan benar disertai dengan video pembelajaran',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.normal,
+                      ),
+                ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 14,
           ),
           Text(
@@ -99,12 +107,15 @@ class AboutUsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 5),
-                child: Icon(
-                  Icons.circle,
-                  size: 8,
+                child: Text(
+                  '1.',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 14,
               ),
               Text(
@@ -120,12 +131,15 @@ class AboutUsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 5),
-                child: Icon(
-                  Icons.circle,
-                  size: 8,
+                child: Text(
+                  '2.',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 14,
               ),
               Text(
@@ -141,12 +155,15 @@ class AboutUsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 5),
-                child: Icon(
-                  Icons.circle,
-                  size: 8,
+                child: Text(
+                  '3.',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 14,
               ),
               Text(
@@ -158,7 +175,7 @@ class AboutUsScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 14,
           ),
           Text(
@@ -172,12 +189,15 @@ class AboutUsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 5),
-                child: Icon(
-                  Icons.circle,
-                  size: 8,
-                ),
+                child: Text(
+                '1.',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
-              SizedBox(
+              ),
+              const SizedBox(
                 width: 14,
               ),
               Text(
@@ -193,12 +213,15 @@ class AboutUsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 5),
-                child: Icon(
-                  Icons.circle,
-                  size: 8,
-                ),
+                child: Text(
+                '2.',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
-              SizedBox(
+              ),
+              const SizedBox(
                 width: 14,
               ),
               Text(
@@ -214,12 +237,15 @@ class AboutUsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 5),
-                child: Icon(
-                  Icons.circle,
-                  size: 8,
-                ),
+                child: Text(
+                '3.',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
-              SizedBox(
+              ),
+              const SizedBox(
                 width: 14,
               ),
               Text(
@@ -235,16 +261,67 @@ class AboutUsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 5),
-                child: Icon(
-                  Icons.circle,
-                  size: 8,
-                ),
+                child: Text(
+                '4.',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
-              SizedBox(
+              ),
+              const SizedBox(
                 width: 14,
               ),
               Text(
                 'Kursus Stir AQUARIUS',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.normal,
+                    ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: Text(
+                '5.',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              ),
+              const SizedBox(
+                width: 14,
+              ),
+              Text(
+                'Junawan Andrea',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.normal,
+                    ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: Text(
+                '6.',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              ),
+              const SizedBox(
+                width: 14,
+              ),
+              Text(
+                'Bro Zacky',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
                       fontWeight: FontWeight.normal,

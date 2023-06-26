@@ -37,11 +37,11 @@ class MyApp extends StatelessWidget {
           foregroundColor: colorScheme.primary,
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData().copyWith(
-          backgroundColor: colorScheme.primary,
-          selectedItemColor: colorScheme.onPrimary,
+          backgroundColor: colorScheme.onPrimaryContainer,
+          selectedItemColor: colorScheme.inversePrimary,
           selectedIconTheme:
-              IconThemeData(color: colorScheme.onPrimary, size: 30),
-          unselectedItemColor: colorScheme.inversePrimary,
+              IconThemeData(color: colorScheme.inversePrimary, size: 30),
+          unselectedItemColor: colorScheme.primary,
           unselectedIconTheme: const IconThemeData(size: 20),
         ),
         cardTheme: const CardTheme().copyWith(
@@ -59,11 +59,12 @@ class MyApp extends StatelessWidget {
             .copyWith(bodyMedium: TextStyle(color: colorScheme.onPrimaryContainer)),
         iconTheme: const IconThemeData().copyWith(
           color: colorScheme.onPrimaryContainer,
+          
         ),
         scaffoldBackgroundColor: colorScheme.background,
       ),
       // themeMode: ThemeMode.system, //default
-      home: AuthPage(),
+      home: const AuthPage(),
     );
   }
 }

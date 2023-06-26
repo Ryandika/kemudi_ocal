@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:login_regist/data/courses.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:login_regist/main.dart';
 import 'package:login_regist/models/location_details.dart';
+import 'package:login_regist/screen/map.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 
 class CourseLocationScreen extends StatefulWidget {
   const CourseLocationScreen({super.key, required this.course});
@@ -24,6 +24,8 @@ class _CourseLocationScreenState extends State<CourseLocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.course.place),
@@ -33,28 +35,40 @@ class _CourseLocationScreenState extends State<CourseLocationScreen> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 300,
-              width: double.infinity,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 1,
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MapScreen(
+                      location: widget.course,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                height: 300,
+                width: width,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                  ),
                 ),
-              ),
-              child: Image.network(
-                locationImage,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
+                child: Image.network(
+                  locationImage,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
               ),
             ),
             const SizedBox(
               height: 14,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 'Alamat',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -68,7 +82,7 @@ class _CourseLocationScreenState extends State<CourseLocationScreen> {
             ),
             // for (final course in widget.course.address)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 widget.course.address[0],
                 textAlign: TextAlign.left,
@@ -78,7 +92,7 @@ class _CourseLocationScreenState extends State<CourseLocationScreen> {
               height: 14,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 'No Telepon',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -91,10 +105,20 @@ class _CourseLocationScreenState extends State<CourseLocationScreen> {
               height: 14,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 widget.course.address[1],
                 textAlign: TextAlign.left,
+              ),
+            ),
+            const SizedBox(height: 14),
+            Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: TextButton.icon(
+                onPressed: () => MapsLauncher.launchQuery(
+                    widget.course.place),
+                icon:const Icon(Iconsax.map_1),
+                label: const Text('Lihat lokasi di peta'),
               ),
             ),
           ],

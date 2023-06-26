@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_regist/login.dart';
 import 'package:login_regist/screen/tabs.dart';
 
 import 'login_or_register_page.dart';
